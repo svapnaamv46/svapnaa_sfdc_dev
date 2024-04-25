@@ -1,0 +1,100 @@
+public with sharing class WeekSixHomework {
+    // Remember Sets & Maps??  We did a little practice with Lists in week 2, but we need to make sure we know how to use Sets & Maps as well!!
+	
+    public static void setsReview(){
+
+        //Your assignment: Play with Sets!
+
+        // 1.  Create a set of Strings and add at least 5 entries
+        	Set<String> SSet = new Set<String>();
+        	SSet.add('item1');
+        	SSet.add('item2');
+        	SSet.add('item3');
+        	SSet.add('item4');
+            SSet.add('item5'); 
+        
+         Boolean result = SSet.isEmpty();
+        System.debug('SSet is Empty' +  result);  // result: SSet is Empty false
+        
+        //Another way of initializing and add the strings to the Set
+        set <String> s1 = new set<String>{'a1', 'b1', 'c1', 'd1', 'e1'};
+         
+        //Use System.debug to print out the size of your set
+			system.debug('The size of the SSet is :' + SSet.size());
+
+        //Add an item to your set that already exists
+        	SSet.add('item1');
+        	s1.add('a1');
+
+
+        //Use System.debug to print out the size again,  they should be the same!
+
+			system.debug('The size of the SSet is :' + SSet.size());  // After executing " the size of the SSet is 5"
+
+        // 2.  Bonus Points!  Check out the documentation on Sets. Go to the section titled Set Methods. Pick one of the methods to try out and print the results to the debug log.  
+        // Documentation: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_methods_system_set.htm
+        
+        //Example for function  addAll(fromSet) 
+        SSet.addAll(s1);
+        System.debug('The Complete Set:' + SSet); //result " the complete set: {a1,b1,c1,d1,e1}"
+        
+		//Hint:  can you print out a boolean that indicates if the set is empty?  Can you clone it?
+        Set<integer> iSet = new Set<integer>();
+        Boolean OP = iSet.isEmpty();
+        System.debug('iSet is Empty' +  OP); // result: iSet is Empty true
+       
+       //  Can you clone it?
+         set<string> cloneds1 = s1.clone();
+        system.debug('cloned set is' + cloneds1);  // result is cloned set is{a1,b1,c1,d1,e1}
+         system.debug('Actual set is' + s1);       // result is Actual set is {a1,b1,c1,d1,e1}
+              
+    }
+
+    public static void mapsReview () {
+
+        //Time to get creative!  
+
+        // 1. Create a new Map.  You can use whatever primitives/object types you like, as long as they make sense.
+        // Try to add at least 5 Key/value pairs.
+			Map<String, Integer> prod = new Map<String, Integer>();
+			prod.put('P1', 5);
+        	prod.put('P2', 10);
+        	prod.put('P3', 15);
+        	prod.put('P4', 20);
+        	prod.put('P5', 25);
+
+        //Now, in the debug log, print out  a list of the values.
+			System.debug('Prod list is ' + prod);
+
+        //Can you print out a set of the Keys?
+        	set<string> p = prod.keyset();
+        system.debug('set of keys is ' + p);// result is set of keys is {P1,P2,P3,P4,P5}
+
+
+
+        // 2. Bonus!  Check out the documentation on Maps. Go to the section titled Map Methods.  Manipulate the Map using one of the methods defined in the documentation
+        // Documentation: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_methods_system_map.htm
+        // Hint: Can you remove an entry using the key?  Can you clear out the map without deleting it?
+			string x  = prod.remove('P3');
+        	System.debug('Maplist is ' + prod);
+        
+        
+    }
+
+    public static void listsReview() {
+
+        // 1. Create a list of Strings.  Add at least 5 entries to the list, all in one line
+
+
+        // 2. Create a second list of Strings and add 5 or more entries to this list.
+
+
+        //3.  Bonus! Using the documentation on standard List methods from Salesforce, add the items from your first list, to your second list with one command
+        // Documentation: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_methods_system_list.htm
+
+
+        //4.  Can you now loop through your combined list and print it to the debug log?  (Hint:  Check the documentation!)
+
+    }
+        
+}
