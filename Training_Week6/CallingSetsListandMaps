@@ -84,17 +84,25 @@ public with sharing class WeekSixHomework {
     public static void listsReview() {
 
         // 1. Create a list of Strings.  Add at least 5 entries to the list, all in one line
+			List<String> sList = new List<String>{'E1', 'E2', 'E3', 'E4', 'E5'};
 
 
         // 2. Create a second list of Strings and add 5 or more entries to this list.
+			List<String> sList2 = new List<String>{'E6', 'E7', 'E8', 'E9', 'E10'};
 
 
         //3.  Bonus! Using the documentation on standard List methods from Salesforce, add the items from your first list, to your second list with one command
         // Documentation: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_methods_system_list.htm
+			sList.addAll(sList2);
+        	system.debug('Combined List is  ' + sList);
 
 
         //4.  Can you now loop through your combined list and print it to the debug log?  (Hint:  Check the documentation!)
+			for(String sList3 : sList) {
+  			  System.debug(sList3);
+}
 
     }
         
 }
+  
