@@ -6,37 +6,40 @@ public with sharing class WeekSixHomework {
         //Your assignment: Play with Sets!
 
         // 1.  Create a set of Strings and add at least 5 entries
-        	Set<String> SSet = new Set<String>();
-        	SSet.add('item1');
-        	SSet.add('item2');
-        	SSet.add('item3');
-        	SSet.add('item4');
-            SSet.add('item5'); 
+        	Set<String> Set1 = new Set<String>();
+        	Set1.add('item1');
+        	Set1.add('item2');
+        	Set1.add('item3');
+        	Set1.add('item4');
+            Set1.add('item5'); 
         
-         Boolean result = SSet.isEmpty();
+         Boolean result = Set1.isEmpty();
         System.debug('SSet is Empty' +  result);  // result: SSet is Empty false
         
         //Another way of initializing and add the strings to the Set
-        set <String> s1 = new set<String>{'a1', 'b1', 'c1', 'd1', 'e1'};
+        set <String> set2 = new set<String>{'a1', 'b1', 'c1', 'd1', 'e1'};
          
         //Use System.debug to print out the size of your set
-			system.debug('The size of the SSet is :' + SSet.size());
+			system.debug('The size of the SSet is :' + Set1.size());
 
         //Add an item to your set that already exists
-        	SSet.add('item1');
-        	s1.add('a1');
+        	Set1.add('item1');
+        	set2.add('a1');
 
 
         //Use System.debug to print out the size again,  they should be the same!
 
-			system.debug('The size of the SSet is :' + SSet.size());  // After executing " the size of the SSet is 5"
+			system.debug('The size of the Set1 is :' + Set1.size());  // After executing " the size of the SSet is 5"
 
         // 2.  Bonus Points!  Check out the documentation on Sets. Go to the section titled Set Methods. Pick one of the methods to try out and print the results to the debug log.  
         // Documentation: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_methods_system_set.htm
         
         //Example for function  addAll(fromSet) 
-        SSet.addAll(s1);
-        System.debug('The Complete Set:' + SSet); //result " the complete set: {a1,b1,c1,d1,e1}"
+      //  Set<string> NewSet = new Set<string>();
+      //  NewSet = Set1.addAll(set2);
+      		Set1.addAll(set2);
+       
+        System.debug('The Complete Set:' + Set1); //result " the complete set: {a1,b1,c1,d1,e1,item1,item2,item3,item4,item5}"
         
 		//Hint:  can you print out a boolean that indicates if the set is empty?  Can you clone it?
         Set<integer> iSet = new Set<integer>();
@@ -44,9 +47,9 @@ public with sharing class WeekSixHomework {
         System.debug('iSet is Empty' +  OP); // result: iSet is Empty true
        
        //  Can you clone it?
-         set<string> cloneds1 = s1.clone();
+         set<string> cloneds1 = set2.clone();
         system.debug('cloned set is' + cloneds1);  // result is cloned set is{a1,b1,c1,d1,e1}
-         system.debug('Actual set is' + s1);       // result is Actual set is {a1,b1,c1,d1,e1}
+         system.debug('Actual set is' + set2);       // result is Actual set is {a1,b1,c1,d1,e1}
               
     }
 
@@ -75,10 +78,11 @@ public with sharing class WeekSixHomework {
         // 2. Bonus!  Check out the documentation on Maps. Go to the section titled Map Methods.  Manipulate the Map using one of the methods defined in the documentation
         // Documentation: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_methods_system_map.htm
         // Hint: Can you remove an entry using the key?  Can you clear out the map without deleting it?
-			string x  = prod.remove('P3');
-        	System.debug('Maplist is ' + prod);
-        
-        
+			Integer x  = prod.remove('P3');
+        	System.debug('Maplist after removing P3 ' + prod); // result Maplist after removing P3 {P1,P2,P4,P5}
+        	
+			prod.clear();
+        System.debug('Map after clearing: ' + prod); //result Map after clearing {}
     }
 
     public static void listsReview() {
@@ -105,4 +109,3 @@ public with sharing class WeekSixHomework {
     }
         
 }
-  
