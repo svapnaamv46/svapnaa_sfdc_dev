@@ -11,7 +11,6 @@ public with sharing class AccountTriggerHandler {
             } else {
                 a.Priority__c = 'Low';
                 
-                
             }
         }
         //this is a before trigger, so our handler doesn't have to call DML
@@ -25,8 +24,7 @@ public with sharing class AccountTriggerHandler {
         	List<Case> casesToInsert = new List<Case>();
         
     	    User u = [SELECT Id, Email FROM User WHERE Id = :runningUserId];
-           	 c.Staff_Email_Address__c = u.Email;
-        
+           	 
         	for (Account a : newAccounts) {
             	Case c = new Case();
            	 	c.Status = 'New';
@@ -34,6 +32,7 @@ public with sharing class AccountTriggerHandler {
            		c.Subject = 'Send Welcome Package';
            		c.AccountId = a.Id;
            		c.Description = 'Please follow up with this new Account and send them a Welcome Package.';
+                c.Staff_Email_Address__c = u.Email;
             	casesToInsert.add(c);
 
             //Get the email address for the Account owner
@@ -41,7 +40,7 @@ public with sharing class AccountTriggerHandler {
            	// c.Staff_Email_Address__c = u.Email;
           //  insert c;
         }
-        
+         insert casesToInsert;
     }
 
     public static void handleAfterUpdate(List<Account> acctsForUpdate, Map<Id, Account> oldAcctMap){
