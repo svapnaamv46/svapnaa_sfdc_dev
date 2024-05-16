@@ -1,0 +1,53 @@
+public class StockItemTriggerHandler {
+	public static void handleBeforeInsert(List<Stock_Item__c> newItems) {
+        // Logic for before insert event
+		Set<String> existingItemNames = new Set<String>();
+        List<Stock_Item__c> itemsToUpdate = new List<Stock_Item__c>();
+        
+		// Collect existing item names
+        for (Stock_Item__c newItem : newItems) {
+            existingItemNames.add(newItem.Item_Name__c);
+        }
+        
+		// Check if there are duplicate names
+        for (Stock_Item__c newItem : newItems) {
+            if (existingItemNames.contains(newItem.Item_Name__c)) {
+                // Modify the name to avoid duplicates
+                newItem.Item_Name__c += ' Duplicate Item';
+                itemsToUpdate.add(newItem);
+            }
+        }
+    }
+    public static void handleBeforeDelete(List<Stock_Item__c> deletedItems) {
+        // Logic for before delete event
+        List<Case> alertCases = new List<Case>();
+        for (Stock_Item__c deletedItem : deletedItems) {
+            if (deletedItem.Stock_on_Hand__c != 0) {
+                
+                // Create a case to alert someone
+                // 
+                Case alertCase = new Case();
+                alertCase.Subject = 'Alert: Stock Item Deleted with Non-zero Stock';
+                alertCase.Description = 'The Stock Item named "' + deletedItem.Item_Name__c + '" (ID: ' + deletedItem.Id + ') was deleted with ' + deletedItem.Stock_on_Hand__c + ' stock on hand.';
+                // Assign the case to someone or specify other relevant fields
+                // alertCase.OwnerId = 'assigneeUserId';
+                alertCases.add(alertCase);
+            }
+        }
+         // Insert alert cases
+        if (!alertCases.isEmpty()) {
+            insert alertCases;
+        }
+    }
+    public static List<Stock_Item__c> getLowStockItems() {
+        List<Stock_Item__c> lowStockItems = new List<Stock_Item__c>();
+         // Query for Stock Items with stock on hand at or below minimum stock level
+        for (Stock_Item__c item : [SELECT Id, Item_Name__c, Item_Stock_is_Low__c, Minimum_Stock_Level__c, Stock_on_Hand__c 
+                                    FROM Stock_Item__c 
+                                    WHERE Item_Stock_is_Low__c = TRUE]) {
+            lowStockItems.add(item);                                 
+}
+        return lowStockItems;
+        
+    }
+}
